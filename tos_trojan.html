@@ -1,0 +1,189 @@
+<html>
+<head>
+	<title>神魔之塔越戰越強online</title>
+	<meta charset="UTF-8">
+	<style>
+		#mark{color:#f00;}
+		#mark2{color:#FFFF00;}
+		
+		#btn2{
+			border-radius: 15px;
+			margin: 0px;
+            -webkit-transition: 0.1s linear;
+            -webkit-transition-property: -webkit-transform margin;}
+		#btn2:hover{
+            margin: 0px;
+            -webkit-transform: scale(1.1);
+		}
+		
+		#formula_body{
+			border-bottom-right-radius:15px;
+			border-bottom-left-radius:15px;
+			border-top-left-radius:15px;
+			border:3px #FFFF00 solid;
+			background:#FFAA33;
+			width:580px;
+			font-size:17pt;
+			font-weight:bold;
+			color:#fff;
+		}
+		
+	</style>
+	
+</head>
+	
+<style>
+		body{}
+</style>
+<body>
+<div style="background-image:url(./img/background.png);position:fixed;top:0;left:0;width:100%;height:100%;"></div>
+
+<div style="position:absolute;top:50px;left:0px;width:100%">
+	<table align="center">
+		<tr>
+			<td align="left" style="font-weight:bold;font-family:微軟正黑體;height:40px;font-size:70px;color:#FFFF33; cursor:default;">
+				<img id="logo" align="center" src="./img/trojan.png" height=120 width=120 style="visibility:visible;"/>
+				<img align="center" src="./img/tosmark.png" width=350 style="linear-gradient:visibility:visible;" />
+				越戰越強計算器
+			</td>
+		</tr>
+	</table>
+</div>
+
+<!--
+<div style="position:absolute;top:0px;left:0px;width:100%">
+	<a href="./tos_reduction.html" style="text-decoration:none;" target="tos_reduction">
+		<img align="left" src="./img/reduction_link.png" width=280 style="linear-gradient:visibility:visible;" />
+	</a>
+</div>
+-->
+
+<div style="position:absolute;top:200px;left:0px;width:100%;height:10px;" onClick="manualText();">
+	<table align="center" style="font-family:微軟正黑體; font-weight:bold; border:8px #00f solid; border-style:double; width:1000px; height:20px; background-color:#eef; color:#00f; font-size:30pt; visibility:visible;">
+		<tr style="cursor:hand;">
+			<td align="center">
+				使用方法 & 注意事項
+			</td>
+		</tr>
+	</table>	
+</div>
+
+<div id="manual" style="position:absolute;top:280px;left:0px;width:100%;height:10px; visibility:hidden;">
+	<table align="center" style="font-family:微軟正黑體; font-weight:bold; border:8px #00f solid; border-style:double; width:1000px; height:20px; background-color:#eef; color:#00f; font-size:25pt; cursor:default; border-bottom-right-radius:25px; border-bottom-left-radius:25px;">
+		<tr>
+			<td>
+				1.此計算器僅適用於<font id="mark">越戰越強</font>系列技能，其他導致額外增傷技能因素不予考慮。<br>
+				2.計算出來之結果可能與真實狀況有些微誤差。<br>
+				3.欲了解計算公式可點選<font id="mark">公式</font>查看目前選擇的越戰越強技能公式。<br>
+				4.部分圖片轉載自神魔之塔 繁中維基；所有圖片版權為MadHead所有。
+			</td>
+		</tr>
+	</table>	
+</div>
+
+<div id="calc" style="position:absolute;top:300px;left:-50px;width:100%;height:500px; cursor:default;">
+	<div style="position:absolute;top:20;left:220;">
+	<font style="font-family:微軟正黑體;align=center;width:60px;height:40px;font-size:30px;color:#fff;">
+	越戰越強種類：</font>
+	<select id="trojan_select" onChange="change_formula();" style="width:180px;height:40px;font-size:18px;color:#000000;" onchange="skillGraphicChange(this.id);">
+		<option value="0" style="color:#FF5511;">越戰越強 ‧ 白金</option>
+		<option value="1" style="color:#FFCC22;" selected="true">越戰越強 ‧ 金</option>
+		<option value="2" style="color:#888888;">越戰越強 ‧ 銀</option>
+		<option value="3" style="color:#CC6600;">越戰越強 ‧ 銅</option>
+		<option value="4" style="color:#444444;">越戰越強 ‧ 鐵</option>
+	</select>
+	</div>
+	
+	<div style="position:absolute;top:100;left:220;">
+	<font style="font-family:微軟正黑體;width:60px;height:40px;font-size:30px;color:#00FFFF;">
+	初始攻擊力：&nbsp;
+	<input type="text" pattern="^/+?[1-9][0-9]*$" title="請輸入正整數" value="" id="init_atk" style="width:130px;height:40px;font-size:30px; border-radius:5px;text-align:right;">
+	</div>
+	
+	<div style="position:absolute;top:100;left:600;">
+		<input id="btn2" type="submit" value="清&nbsp;&nbsp;除" onclick="clearData();" style="width:150px;font-family:微軟正黑體;border:3px solid;padding:5px;border-color:#FFDDAA;background-color:#FF5511; color:#FFFFFF; font-size:21pt; box-shadow: 5px 5px 10px #FF5511; cursor:hand;">
+	</div>
+	
+	<div style="position:absolute;top:180;left:220;">
+	<font style="font-family:微軟正黑體;width:60px;height:40px;font-size:30px;color:#ff0;">
+	血量%數：&nbsp;
+	<input type="text" pattern="^/+?[1-9][0-9]*$" title="請輸入0~100的數" value="" id="percent" style="width:80px;height:40px;font-size:30px; border-radius:5px;text-align:right;">
+	<div style="position:absolute;top:0;left:350;">
+		<input id="btn2" type="submit" value="%數→攻擊力" onclick="percentToAtk();" style="width:180px;font-family:微軟正黑體;font-weight:bold;border:3px solid;padding:5px;border-color:#CC00FF;background-color:#660077; color:#FFFFFF; font-size:20pt; box-shadow: 5px 5px 10px #660077; cursor:hand;">
+	</div>%
+	
+	<div style="position:absolute;top:-30;left:600;width:400;">
+		<table>
+			<tr>
+				<td id="resultLabel" align="center" style="font-family:微軟正黑體; font-weight:bold; border:8px #F70 solid; border-style:dashed; width:500px; height:120px; background-color:#FFFFBB; color:#FF7700; font-size:30pt; visibility:hidden;">攻擊力： 0</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div style="position:absolute;top:60;left:240;width:400;">
+		<table>
+			<tr>
+				<td id="magnification" align="center" style="font-family:微軟正黑體; font-weight:bold; width:500px; height:20px; color:#FF0000; font-size:21pt; visibility:hidden;">攻擊倍率：1 倍</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div id="double_strike" style="position:absolute;top:60;left:100;width:400;visibility:hidden;">
+		<font style="font-family:微軟正黑體;align=center;width:60px;height:40px;font-size:30px;color:#00FF00;">
+		<b>發動連擊</b></font>
+		<img align="center" src="./img/double_strike.png" style="linear-gradient:visibility:visible;" />
+	</div>
+	
+	<div style="position:absolute;top:150;left:0;">
+	<font style="font-family:微軟正黑體;width:60px;height:40px;font-size:30px;color:#ff0;">
+	攻擊力：&nbsp;
+	<input type="text" pattern="^/+?[1-9][0-9]*$" title="請輸入正整數" value="" id="atk" style="width:130px;height:40px;font-size:30px; border-radius:5px;text-align:right;">
+	<div style="position:absolute;top:0;left:350;">
+		<input id="btn2" type="submit" value="攻擊力→%數" onclick="atkToPercent();" style="width:180px;font-family:微軟正黑體;font-weight:bold;border:3px solid;padding:5px;border-color:#CC00FF;background-color:#660077; color:#FFFFFF; font-size:20pt; box-shadow: 5px 5px 10px #660077; cursor:hand;">
+	</div>
+	
+	<div style="position:absolute;top:-30;left:600;width:400;">
+		<table>
+			<tr>
+				<td id="resultLabel2" align="center" style="font-family:微軟正黑體; font-weight:bold; border:8px #F70 solid; border-style:dashed; width:500px; height:120px; background-color:#FFFFBB; color:#FF7700; font-size:30pt; visibility:hidden;">0 %</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div style="position:absolute;top:60;left:240;width:400;">
+		<table>
+			<tr>
+				<td id="magnification2" align="center" style="font-family:微軟正黑體; font-weight:bold; width:500px; height:20px; color:#FF0000; font-size:21pt; visibility:hidden;">攻擊倍率：1 倍</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div id="double_strike2" style="position:absolute;top:60;left:100;width:400;visibility:hidden;">
+		<font style="font-family:微軟正黑體;align=center;width:60px;height:40px;font-size:30px;color:#00FF00;">
+		<b>發動連擊</b></font>
+		<img align="center" src="./img/double_strike.png" style="linear-gradient:visibility:visible;" />
+	</div>
+	
+	
+	</div>
+	
+	</div>
+	
+	<div style="position:absolute;top:20;left:820;">
+		<input id="formula" type="submit" value="越戰越強 ‧ 金  公式" onclick="formula();" style="width:400px;font-family:微軟正黑體;border:3px solid;padding:5px;border-color:#FFFF00;background-color:#FFAA33; color:#FFFFFF; font-size:21pt; box-shadow: 5px 5px 10px #FF5511; cursor:hand;">
+		<div id="formula_body" style="position:absolute;top:0px;left:-600px;visibility:hidden;">
+		<table style="font-family:微軟正黑體; font-size:17pt; font-weight:bold; color:#fff;">
+			<tr>
+				<td>
+					若你看到出現此文字代表網頁尚未處理完成，請稍後或重新整理。
+				</td>
+			</tr>
+		</table>	
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="trojan_setting.js"></script>
+</body>
+
+</html>
